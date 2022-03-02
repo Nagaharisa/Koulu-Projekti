@@ -1,0 +1,103 @@
+const poke_container = document.getElementById("poke-container");
+const pokemon_count = 10;
+const colors = {
+    fire: "#FDDFDF",
+    grass: "#DEFDE0",
+    electric: "#FCF7DE",
+    water: "#DEF3FD",
+    ground: "#f4e7da",
+    rock: "#d5d5d4",
+    fairy: "#fceaff",
+    poison: "#98d7a5",
+    bug: "#f8d5a3",
+    dragon: "#97b3e6",
+    psychic: "#eaeda1",
+    flying: "#F5F5F5",
+    fighting: "#E6E0D4",
+    normal: "#F5F5F5",
+};
+
+const main_types = Object.keys(colors);
+
+async function fetchPokemons() {
+    for (let i = 1; i <= pokemon_count; i++) {
+        await getPokemon(i);
+    }
+}
+
+async function getPokemon(id) {
+    const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    createPokemonCard(data);
+}
+
+function createPokemonCard(pokemon) {
+    const pokemonEl = document.createElement("div");
+    const pokemonCard = document.createElement("div");
+
+    pokemonEl.classList.add("pokemon");
+    pokemonCard.classList.add("pokemonCard");
+
+    pokemonCard.id = `card_${pokemon.id}`;
+
+    const name = pokemon.name[0].toUpperCase() + pokemon.name.slice(1);
+    const id = pokemon.id.toString().padStart(3, "0");
+
+    const poke_types = pokemon.types.map((type) => type.type.name);
+    const type = main_types.find((type) => poke_types.indexOf(type) > -1);
+    const color = colors[type];
+
+    pokemonEl.style.backgroundColor = color;
+    pokemonCard.style.backgroundColor = color;
+
+    pokemonCard.style.display = "none";
+
+    const pokemonInnerHTML = `
+    <button onclick="dataPokemon(${pokemon.id})">
+        <div class="img-container">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png" alt="">
+        </div>
+        <div class="info">
+            <span class="number">#${id}</span>
+            <h3 class="name">${name}</h3>
+            <small class="type">Type: <span>${type}</span> </small>
+        </div>
+    </button>
+    `;
+
+    const pokemonCardInnerHTML = `
+    <button class="cardBackButton" onclick="goBack(${pokemon.id})">Back</button>
+    <div class="cardImageContainer">
+        <img class="cardImage" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png" alt="">
+    </div>
+        
+    <div class="cardInfo">
+        <p class="cardData">Name: ${name}</p>
+        <p class="cardData">Type: ${type}</p>
+        <p class="cardData">Height: ${pokemon.height}</p>
+        <p class="cardData">Weight: ${pokemon.weight}</p>
+        <p class="cardData">Pokemon id: ${pokemon.id}</p>
+    </div>
+    `;
+
+    pokemonEl.innerHTML = pokemonInnerHTML;
+    pokemonCard.innerHTML = pokemonCardInnerHTML;
+
+    poke_container.appendChild(pokemonEl);
+    cardContainer.appendChild(pokemonCard);
+}
+
+function dataPokemon(id) {
+    document.getElementById("poke-container").style.display = "none";
+
+    document.getElementById(`card_${id}`).style.display = "block";
+}
+
+function goBack(id) {
+    document.getElementById("poke-container").style.display = "flex";
+
+    document.getElementById(`card_${id}`).style.display = "none";
+}
+
+fetchPokemons();
