@@ -1,5 +1,5 @@
 const poke_container = document.getElementById("poke-container");
-const pokemon_count = 10;
+const pokemon_count = 100;
 const colors = {
     fire: "#FDDFDF",
     grass: "#DEFDE0",
@@ -37,6 +37,8 @@ function createPokemonCard(pokemon) {
     const pokemonCard = document.createElement("div");
 
     pokemonEl.classList.add("pokemon");
+    pokemonEl.setAttribute("onclick", `dataPokemon(${pokemon.id})`);
+
     pokemonCard.classList.add("pokemonCard");
 
     pokemonCard.id = `card_${pokemon.id}`;
@@ -54,16 +56,14 @@ function createPokemonCard(pokemon) {
     pokemonCard.style.display = "none";
 
     const pokemonInnerHTML = `
-    <button onclick="dataPokemon(${pokemon.id})">
-        <div class="img-container">
-            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png" alt="">
-        </div>
-        <div class="info">
-            <span class="number">#${id}</span>
-            <h3 class="name">${name}</h3>
-            <small class="type">Type: <span>${type}</span> </small>
-        </div>
-    </button>
+    <div class="img-container">
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png" alt="">
+    </div>
+    <div class="info">
+        <span class="number">#${id}</span>
+        <h3 class="name">${name}</h3>
+        <small class="type">Type: <span>${type}</span> </small>
+    </div>
     `;
 
     const pokemonCardInnerHTML = `

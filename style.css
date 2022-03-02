@@ -35,6 +35,11 @@ h1 {
     margin: 10px;
     padding: 20px;
     text-align: center;
+    cursor: pointer;
+}
+
+.pokemon:hover {
+    box-shadow: 0 5px 20px rgba(70, 70, 70, 0.8);
 }
 
 .pokemon .img-container {
@@ -76,7 +81,7 @@ h1 {
 .cardImageContainer {
     width: 288px;
     height: 288px;
-    margin: 10px auto;
+    margin: 20px auto;
 }
 
 .pokemonCard {
@@ -89,7 +94,7 @@ h1 {
 
 .cardInfo {
     background-color: white;
-    height: 40%;
+    height: 35%;
     width: 50%;
     margin: 0px auto;
     border-radius: 10px;
@@ -105,5 +110,8 @@ h1 {
 .cardBackButton {
     font-size: 18px;
     border-radius: 10px;
+}
 
+.cardBackButton:hover {
+    box-shadow: 0 0px 5px rgba(70, 70, 70, 0.8);
 }
