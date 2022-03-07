@@ -25,14 +25,22 @@ const colors = {
 //Tässä main_types juttuun laitetaan colors muuttujan avaimet, eli fire, grass, jne.
 const main_types = Object.keys(colors);
 
+<<<<<<< HEAD
 //Tämä funktio aloittaa koko homman. Se silmukoi getPokemon funktiota eri id muuttujalla
+=======
+//Tämä funktio hakee pokemonien tiedot API:sta id:n mukaan
+>>>>>>> e3eace231d617ddda83f17c1140c5b71ce5f0a5b
 async function fetchPokemons() {
     for (let i = 1; i <= pokemon_count; i++) {
         await getPokemon(i);
     }
 }
 
+<<<<<<< HEAD
 //Funktio hakee pokeapi:sta id mukaan pokemonin dataa ja muuttaa sen json formaattiin
+=======
+//Tämä funktio hakee pokemonin tiedot API:sta
+>>>>>>> e3eace231d617ddda83f17c1140c5b71ce5f0a5b
 async function getPokemon(id) {
     const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
     const res = await fetch(url);
@@ -40,7 +48,11 @@ async function getPokemon(id) {
     createPokemonCard(data);
 }
 
+<<<<<<< HEAD
 //Tämä funktio tekee kortit sivulle
+=======
+
+>>>>>>> e3eace231d617ddda83f17c1140c5b71ce5f0a5b
 function createPokemonCard(pokemon) {
 
     //Tässä tehdään 2 div elementtiä, j
@@ -63,9 +75,9 @@ function createPokemonCard(pokemon) {
 
     pokemonEl.style.backgroundColor = color;
     pokemonCard.style.backgroundColor = color;
-
     pokemonCard.style.display = "none";
 
+    //Tämä on HTML, mikä lisätään päädiviin ja näytetään käyttäjälle
     const pokemonInnerHTML = `
     <div class="img-container">
         <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png" alt="">
@@ -77,6 +89,7 @@ function createPokemonCard(pokemon) {
     </div>
     `;
 
+    //Tämä on HTML, mikä lisätään lisätietoa pokemonista diviin ja näytetään tarvittaessa
     const pokemonCardInnerHTML = `
     <button class="cardBackButton" onclick="goBack(${pokemon.id})">Back</button>
     <div class="cardImageContainer">
@@ -92,23 +105,26 @@ function createPokemonCard(pokemon) {
     </div>
     `;
 
+    //Tässä entiset HTML jutut lisätään diveihin
     pokemonEl.innerHTML = pokemonInnerHTML;
     pokemonCard.innerHTML = pokemonCardInnerHTML;
 
+    //Tässä entiset divit lisätään päädiviin
     poke_container.appendChild(pokemonEl);
     cardContainer.appendChild(pokemonCard);
 }
 
+//Tämä funktio piilottaa päädivin ja näyttää pokemonin lisätietoja
 function dataPokemon(id) {
     document.getElementById("poke-container").style.display = "none";
-
     document.getElementById(`card_${id}`).style.display = "block";
 }
 
+//Tämä funktio piilottaa lisätiedot ja näyttää päädivin
 function goBack(id) {
     document.getElementById("poke-container").style.display = "flex";
-
     document.getElementById(`card_${id}`).style.display = "none";
 }
 
+//Tästä alkaa ohjelma
 fetchPokemons();
