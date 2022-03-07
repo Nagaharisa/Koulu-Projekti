@@ -1,5 +1,10 @@
+//Tässä poke_container muuttumattomaan muuttujaan otetaan div elementti
 const poke_container = document.getElementById("poke-container");
+
+//Tässä määritetään monta pokemonia laitetaan näkyviin
 const pokemon_count = 100;
+
+//Tässä määritetään eri pokemon-tyyppien värit
 const colors = {
     fire: "#FDDFDF",
     grass: "#DEFDE0",
@@ -17,14 +22,17 @@ const colors = {
     normal: "#F5F5F5",
 };
 
+//Tässä main_types juttuun laitetaan colors muuttujan avaimet, eli fire, grass, jne.
 const main_types = Object.keys(colors);
 
+//Tämä funktio aloittaa koko homman. Se silmukoi getPokemon funktiota eri id muuttujalla
 async function fetchPokemons() {
     for (let i = 1; i <= pokemon_count; i++) {
         await getPokemon(i);
     }
 }
 
+//Funktio hakee pokeapi:sta id mukaan pokemonin dataa ja muuttaa sen json formaattiin
 async function getPokemon(id) {
     const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
     const res = await fetch(url);
@@ -32,7 +40,10 @@ async function getPokemon(id) {
     createPokemonCard(data);
 }
 
+//Tämä funktio tekee kortit sivulle
 function createPokemonCard(pokemon) {
+
+    //Tässä tehdään 2 div elementtiä, j
     const pokemonEl = document.createElement("div");
     const pokemonCard = document.createElement("div");
 
